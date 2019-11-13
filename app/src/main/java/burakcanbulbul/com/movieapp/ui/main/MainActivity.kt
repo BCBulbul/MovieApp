@@ -3,11 +3,14 @@ package burakcanbulbul.com.movieapp.ui.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import burakcanbulbul.com.movieapp.R
+import burakcanbulbul.com.movieapp.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(getLayoutRes())
     }
+
+    override fun getLayoutRes(): Int = R.layout.activity_main
 }
