@@ -1,6 +1,6 @@
 package burakcanbulbul.com.movieapp.constants
 
-class MovieConstants {
+class MovieDBConstants {
 
     companion object{
         const val API_KEY : String = "79c8caa4f1e7d45cb9181a224502b85c"

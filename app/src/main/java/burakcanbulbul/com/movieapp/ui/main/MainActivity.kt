@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import burakcanbulbul.com.movieapp.R
 import burakcanbulbul.com.movieapp.base.BaseActivity
-import burakcanbulbul.com.movieapp.constants.MovieConstants
-import burakcanbulbul.com.movieapp.model.MovieResult
-import burakcanbulbul.com.movieapp.model.NowPlayingMovie
-import burakcanbulbul.com.movieapp.model.TVMovieResult
-import burakcanbulbul.com.movieapp.remote.MovieAppDataSource
+import burakcanbulbul.com.movieapp.constants.MovieDBConstants
+import burakcanbulbul.com.movieapp.model.TVSeriesResult
+import burakcanbulbul.com.movieapp.remote.MovieDBAppDataSource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,22 +15,22 @@ import javax.inject.Inject
 class MainActivity : BaseActivity() {
 
     @Inject
-    lateinit var movieAppDataSource : MovieAppDataSource
+    lateinit var movieDBAppDataSource : MovieDBAppDataSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutRes())
-
-        movieAppDataSource.getTopRatedTVMovies(MovieConstants.API_KEY, 1).enqueue(object  : Callback<TVMovieResult>{
-            override fun onFailure(call: Call<TVMovieResult>, t: Throwable) {
+        movieDBAppDataSource.getPopularTVSeries(MovieDBConstants.API_KEY, 1).enqueue(object : Callback<TVSeriesResult>{
+            override fun onFailure(call: Call<TVSeriesResult>, t: Throwable) {
                 Log.d("Onfailure",t.message)
             }
 
-            override fun onResponse(call: Call<TVMovieResult>, response: Response<TVMovieResult>) {
-                Log.d("DataResponse",response.body()!!.tvMovieResults[0].originalName)
+            override fun onResponse(call: Call<TVSeriesResult>, response: Response<TVSeriesResult>) {
+                Log.d("OnResponse",response.body()!!.tvSeriesResults[0].originalLanguage)
             }
 
         })
+
 
     }
 

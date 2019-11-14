@@ -1,8 +1,8 @@
 package burakcanbulbul.com.movieapp.di.module
 
 import android.content.Context
-import burakcanbulbul.com.movieapp.remote.MovieAppDataSource
-import burakcanbulbul.com.movieapp.remote.MovieAppDataSourceBuilder
+import burakcanbulbul.com.movieapp.remote.MovieDBAppDataSource
+import burakcanbulbul.com.movieapp.remote.MovieDBAppDataSourceBuilder
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -11,7 +11,7 @@ import dagger.Provides
 class DataSourceModule {
 
     @Provides
-    fun provideMovieAppDataSource(context : Context, gson : Gson) : MovieAppDataSource{
-        return MovieAppDataSourceBuilder().with(context).build(gson)
+    fun provideMovieAppDataSource(context : Context, gson : Gson) : MovieDBAppDataSource{
+        return MovieDBAppDataSourceBuilder().with(context).build(gson)
     }
 }

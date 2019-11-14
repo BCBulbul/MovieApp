@@ -1,14 +1,14 @@
 package burakcanbulbul.com.movieapp.remote
 
-import burakcanbulbul.com.movieapp.constants.MovieConstants
 import burakcanbulbul.com.movieapp.model.MovieResult
 import burakcanbulbul.com.movieapp.model.NowPlayingMovie
-import burakcanbulbul.com.movieapp.model.TVMovieResult
+import burakcanbulbul.com.movieapp.model.TVSeriesResult
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MovieAppDataSource {
+interface MovieDBAppDataSource {
 
     @GET("movie/popular?")
     fun getPopularMovies (@Query("api_key") apiKey : String, @Query("page") pageNumber : Int) : Call<MovieResult>
@@ -20,5 +20,8 @@ interface MovieAppDataSource {
     fun getNowPlayingMovies(@Query("api_key") apiKey: String, @Query("page") pageNumber: Int) : Call<NowPlayingMovie>
 
     @GET("tv/top_rated?")
-    fun getTopRatedTVMovies(@Query("api_key") apiKey: String, @Query("page") pageNumber: Int) : Call<TVMovieResult>
+    fun getTopRatedTVSeries(@Query("api_key") apiKey: String, @Query("page") pageNumber: Int) : Call<TVSeriesResult>
+
+    @GET("tv/popular?")
+    fun getPopularTVSeries(@Query("api_key") apiKey: String, @Query("page") pageNumber: Int) : Call<TVSeriesResult>
 }
