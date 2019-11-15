@@ -9,6 +9,8 @@ import android.view.ViewGroup
 
 import burakcanbulbul.com.movieapp.R
 import burakcanbulbul.com.movieapp.base.BaseFragment
+import burakcanbulbul.com.movieapp.ui.movies.MoviesFragment
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class ProfileFragment : BaseFragment() {
@@ -27,6 +29,9 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        click.setOnClickListener {
+            fragmentNavigation.pushFragment(MoviesFragment.newInstance())
+        }
     }
 
     override fun getLayoutRes(): Int = R.layout.fragment_profile

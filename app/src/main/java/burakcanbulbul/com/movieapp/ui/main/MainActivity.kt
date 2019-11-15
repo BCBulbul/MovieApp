@@ -3,9 +3,11 @@ package burakcanbulbul.com.movieapp.ui.main
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import burakcanbulbul.com.movieapp.R
 import burakcanbulbul.com.movieapp.base.BaseActivity
+import burakcanbulbul.com.movieapp.base.BaseFragment
 import burakcanbulbul.com.movieapp.constants.MovieDBConstants
 import burakcanbulbul.com.movieapp.constants.MovieDBConstants.Companion.INDEX_MOVIES
 import burakcanbulbul.com.movieapp.constants.MovieDBConstants.Companion.INDEX_PROFILE
@@ -16,12 +18,13 @@ import burakcanbulbul.com.movieapp.ui.movies.MoviesFragment
 import burakcanbulbul.com.movieapp.ui.profile.ProfileFragment
 import burakcanbulbul.com.movieapp.ui.tv.TVFragment
 import com.ncapdevi.fragnav.FragNavController
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() , MainActivityView, FragNavController.RootFragmentListener {
+class MainActivity : BaseActivity() , MainActivityView, FragNavController.RootFragmentListener, BaseFragment.FragmentNavigation{
 
     override val numberOfRootFragments: Int = 3
 
@@ -31,17 +34,21 @@ class MainActivity : BaseActivity() , MainActivityView, FragNavController.RootFr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutRes())
-        initFragNav(savedInstanceState)
+        init(savedInstanceState)
     }
 
-    override fun initFragNav(bundle : Bundle?) {
+    override fun getLayoutRes(): Int = R.layout.activity_main
+
+    override fun init(bundle : Bundle?) {
         fragNavController.rootFragments = fragments
         fragNavController.initialize(INDEX_MOVIES,bundle)
+        selectBottomBarTab()
+        setOnBottomBarReselectListener()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        fragNavController.onSaveInstanceState(outState!!)
+        fragNavController.onSaveInstanceState(outState)
     }
 
     override fun getRootFragment(index: Int): Fragment {
@@ -54,6 +61,35 @@ class MainActivity : BaseActivity() , MainActivityView, FragNavController.RootFr
 
     }
 
+    override fun onBackPressed() {
+        when {
+            fragNavController.isRootFragment.not() -> fragNavController.popFragment()
+            else -> super.onBackPressed()
+        }
+    }
 
-    override fun getLayoutRes(): Int = R.layout.activity_main
+    override fun selectBottomBarTab() {
+       bottom_navigation_menu.setOnNavigationItemSelectedListener {
+           when(it.itemId){
+               R.id.navigation_movies -> fragNavController.switchTab(INDEX_MOVIES)
+               R.id.navigation_tv -> fragNavController.switchTab(INDEX_TV)
+               R.id.navigation_profile -> fragNavController.switchTab(INDEX_PROFILE)
+           }
+           return@setOnNavigationItemSelectedListener true
+       }
+    }
+
+
+    override fun setOnBottomBarReselectListener() {
+        fragNavController.clearStack()
+    }
+
+    override fun pushFragment(fragment: Fragment) {
+        fragNavController.pushFragment(fragment)
+    }
+
+
+
+
+
 }

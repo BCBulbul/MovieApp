@@ -7,9 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation_menu"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:menu="@menu/bottom_navigation"
+        android:id="@+id/bottom_navigation_menu"
         android:layout_alignParentBottom="true"
-        android:background="@color/cardview_dark_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
