@@ -10,9 +10,10 @@ import burakcanbulbul.com.movieapp.constants.MovieDBConstants
 import burakcanbulbul.com.movieapp.model.Movie
 import burakcanbulbul.com.movieapp.widget.RecyclerViewClickListener
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.top_rated_movies_list.view.*
+import kotlinx.android.synthetic.main.now_playing_movies_list.view.*
+import kotlinx.android.synthetic.main.popular_movies_list.view.*
 
-class TopRatedMoviesAdapter() : RecyclerView.Adapter<TopRatedMoviesAdapter.ViewHolder>() {
+class PopularMoviesAdapter() : RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>() {
 
     private lateinit var movies : ArrayList<Movie>
     private lateinit var recyclerViewClickListener : RecyclerViewClickListener
@@ -22,7 +23,7 @@ class TopRatedMoviesAdapter() : RecyclerView.Adapter<TopRatedMoviesAdapter.ViewH
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView : View = LayoutInflater.from(parent.context).inflate(R.layout.top_rated_movies_list,parent,false)
+        val itemView : View = LayoutInflater.from(parent.context).inflate(R.layout.popular_movies_list,parent,false)
         return ViewHolder(itemView)
     }
 
@@ -43,8 +44,10 @@ class TopRatedMoviesAdapter() : RecyclerView.Adapter<TopRatedMoviesAdapter.ViewH
         init {itemView.setOnClickListener(this)}
 
         fun bind(movie : Movie){
-            Log.d("MovieAdapter",MovieDBConstants.IMAGE_URL.plus(movie.posterPath))
-            Picasso.get().load(MovieDBConstants.IMAGE_URL.plus(movie.posterPath)).into(itemView.top_rated_movies_list_image_view)
+            Log.d("MovieNowPlayingAdapter", movie.voteAverage.toString())
+            Picasso.get().load(MovieDBConstants.IMAGE_URL.plus(movie.posterPath)).into(itemView.popular_movies_image_view)
+            itemView.popular_movies_text_view.text = movie.originalTitle
+            itemView.popular_movies_average_text.text = movie.voteAverage.toString()
         }
 
         override fun onClick(v: View?) {

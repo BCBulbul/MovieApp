@@ -1,4 +1,4 @@
-package burakcanbulbul.com.movieapp.widget
+package burakcanbulbul.com.movieapp.helper
 
 import android.view.View
 import androidx.recyclerview.widget.OrientationHelper
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.LinearSnapHelper
-
 
 class StartSnapHelper : LinearSnapHelper() {
 

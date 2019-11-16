@@ -14,7 +14,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:text="TOP RATED MOVIES"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"
         android:textSize="30sp"
         android:textColor="@android:color/black"

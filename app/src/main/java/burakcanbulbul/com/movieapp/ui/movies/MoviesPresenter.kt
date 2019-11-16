@@ -32,6 +32,7 @@ class MoviesPresenter : MoviesContract.Presenter() {
             override fun onResponse(call: Call<MovieResult>, response: Response<MovieResult>) {
                 if(response.isSuccessful.and(response.body() != null)){
                     onResponseSuccessListener.onPopularMovieResponseSuccess(response.body()!!)
+
                 }
             }
 

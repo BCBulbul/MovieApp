@@ -3,14 +3,12 @@ package burakcanbulbul.com.movieapp.ui.movies
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 
 import burakcanbulbul.com.movieapp.R
+import burakcanbulbul.com.movieapp.adapter.NowPlayingMoviesAdapter
+import burakcanbulbul.com.movieapp.adapter.PopularMoviesAdapter
 import burakcanbulbul.com.movieapp.adapter.TopRatedMoviesAdapter
 import burakcanbulbul.com.movieapp.base.BaseFragment
 import burakcanbulbul.com.movieapp.constants.MovieDBConstants
@@ -18,7 +16,8 @@ import burakcanbulbul.com.movieapp.model.MovieResult
 import burakcanbulbul.com.movieapp.model.NowPlayingMovie
 import burakcanbulbul.com.movieapp.remote.MovieDBAppDataSource
 import burakcanbulbul.com.movieapp.widget.RecyclerViewClickListener
-import burakcanbulbul.com.movieapp.widget.StartSnapHelper
+import burakcanbulbul.com.movieapp.helper.StartSnapHelper
+import burakcanbulbul.com.movieapp.model.Movie
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
 
@@ -31,6 +30,8 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
     lateinit var moviesPresenter: MoviesPresenter
 
     private lateinit var topRatedMoviesAdapter : TopRatedMoviesAdapter
+    private lateinit var nowPlayingMoviesAdapter: NowPlayingMoviesAdapter
+    private lateinit var popularMoviesAdapter: PopularMoviesAdapter
 
     companion object{
         fun newInstance() : MoviesFragment{
@@ -62,17 +63,46 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
     }
 
     override fun initTopRatedMoviesAdapter(movieResult: MovieResult) {
-        topRatedMoviesAdapter = TopRatedMoviesAdapter(movieResult.movieResults)
-        topRatedMoviesAdapter.setOnRecyclerViewClickListener(this)
-        top_rated_movies_recycler_View.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        top_rated_movies_recycler_View.setHasFixedSize(true)
-        top_rated_movies_recycler_View.adapter = topRatedMoviesAdapter
-        var linearSnapHelper : LinearSnapHelper = LinearSnapHelper()
-        linearSnapHelper.attachToRecyclerView(top_rated_movies_recycler_View)
+        if(top_rated_movies_recycler_View.adapter == null){
+            topRatedMoviesAdapter = TopRatedMoviesAdapter(movieResult.movieResults)
+            topRatedMoviesAdapter.setOnRecyclerViewClickListener(this)
+            top_rated_movies_recycler_View.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            top_rated_movies_recycler_View.setHasFixedSize(true)
+            val startSnapHelper : StartSnapHelper = StartSnapHelper()
+            startSnapHelper.attachToRecyclerView(top_rated_movies_recycler_View)
+            top_rated_movies_recycler_View.adapter = topRatedMoviesAdapter
+        }
+
+
+    }
+
+    override fun initNowPlayingMoviesAdapter(movies: ArrayList<Movie>) {
+        if(now_playing_movies_recycler_view.adapter == null){
+            nowPlayingMoviesAdapter = NowPlayingMoviesAdapter(movies)
+            nowPlayingMoviesAdapter.setOnRecyclerViewClickListener(this)
+            now_playing_movies_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            now_playing_movies_recycler_view.setHasFixedSize(true)
+            val startSnapHelper : StartSnapHelper = StartSnapHelper()
+            startSnapHelper.attachToRecyclerView(now_playing_movies_recycler_view)
+            now_playing_movies_recycler_view.adapter = nowPlayingMoviesAdapter
+        }
+
+    }
+
+    override fun initPopularMoviesAdapter(movies: ArrayList<Movie>) {
+        if(popular_movies_recycler_view.adapter == null){
+            popularMoviesAdapter = PopularMoviesAdapter(movies)
+            popularMoviesAdapter.setOnRecyclerViewClickListener(this)
+            popular_movies_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            popular_movies_recycler_view.setHasFixedSize(true)
+            val startSnapHelper : StartSnapHelper = StartSnapHelper()
+            startSnapHelper.attachToRecyclerView(popular_movies_recycler_view)
+            popular_movies_recycler_view.adapter = popularMoviesAdapter
+        }
     }
 
     override fun onPopularMovieResponseSuccess(movieResult: MovieResult) {
-        Log.d("MovieREsult",movieResult.movieResults[0].overview)
+        initPopularMoviesAdapter(movieResult.movieResults)
     }
 
     override fun onTopRatedMovieResponseSuccess(movieResult: MovieResult) {
@@ -80,7 +110,7 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
     }
 
     override fun onNowPLayingMovieResponseSuccess(nowPlayingMovie: NowPlayingMovie) {
-        Log.d("OnNowPlaying",nowPlayingMovie.movies[0].releaseDate)
+        initNowPlayingMoviesAdapter(nowPlayingMovie.movies)
     }
 
     override fun fetchNowPlayingMovies(apiKey: String,pageNumber: Int) {

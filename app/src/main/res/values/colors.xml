@@ -5,5 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="status_bar_color">#f7f8f9</color>
     <color name="movie_text_view_color">#656667</color>
-
+    <color name="floating_action_button_gradient_first_color">#f99038</color>
+    <color name="floating_action_button_gradient_second_color">#cd4a62</color>
 </resources>

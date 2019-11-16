@@ -1,5 +1,6 @@
 package burakcanbulbul.com.movieapp.ui.movies
 
+import burakcanbulbul.com.movieapp.model.Movie
 import burakcanbulbul.com.movieapp.model.MovieResult
 import burakcanbulbul.com.movieapp.model.NowPlayingMovie
 import burakcanbulbul.com.movieapp.mvp.MainPresenterImpl
@@ -12,6 +13,8 @@ interface MoviesContract {
         fun init()
         fun initPresenter()
         fun initTopRatedMoviesAdapter(movieResult: MovieResult)
+        fun initNowPlayingMoviesAdapter(movies : ArrayList<Movie>)
+        fun initPopularMoviesAdapter(movies : ArrayList<Movie>)
         fun fetchTopRatedMovies(apiKey: String,pageNumber: Int)
         fun fetchPopularMovies(apiKey: String, pageNumber: Int)
         fun fetchNowPlayingMovies(apiKey: String,pageNumber: Int)
