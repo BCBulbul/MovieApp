@@ -71,9 +71,18 @@ class MainActivity : BaseActivity() , MainActivityView, FragNavController.RootFr
     override fun selectBottomBarTab() {
        bottom_navigation_menu.setOnNavigationItemSelectedListener {
            when(it.itemId){
-               R.id.navigation_movies -> fragNavController.switchTab(INDEX_MOVIES)
-               R.id.navigation_tv -> fragNavController.switchTab(INDEX_TV)
-               R.id.navigation_profile -> fragNavController.switchTab(INDEX_PROFILE)
+               R.id.navigation_movies -> {
+                   fragNavController.switchTab(INDEX_MOVIES)
+                   it.setIcon(R.drawable.tabmoviesselected)
+               }
+               R.id.navigation_tv -> {
+                   fragNavController.switchTab(INDEX_TV)
+                   it.setIcon(R.drawable.tabtvselected)
+               }
+               R.id.navigation_profile ->{
+                   fragNavController.switchTab(INDEX_PROFILE)
+                   it.setIcon(R.drawable.tabprofileselected)
+               }
            }
            return@setOnNavigationItemSelectedListener true
        }
@@ -81,7 +90,11 @@ class MainActivity : BaseActivity() , MainActivityView, FragNavController.RootFr
 
 
     override fun setOnBottomBarReselectListener() {
-        fragNavController.clearStack()
+
+        bottom_navigation_menu.setOnNavigationItemReselectedListener {
+            fragNavController.clearStack()
+        }
+
     }
 
     override fun pushFragment(fragment: Fragment) {

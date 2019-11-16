@@ -8,7 +8,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 
 @Component(modules = [ApplicationModule::class, AndroidSupportInjectionModule :: class,
     ActivityBindingModule :: class, FragmentBindingModule :: class, DataSourceModule :: class,
-    GsonModule::class, SerializerModule::class
+    GsonModule::class, SerializerModule::class, PresenterModule :: class
 ])
 interface ApplicationComponent : AndroidInjector<MainApplication> {
 

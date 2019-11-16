@@ -3,4 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="status_bar_color">#f7f8f9</color>
+    <color name="movie_text_view_color">#656667</color>
+
 </resources>
