@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/click"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile Fragment" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:background=""
+        android:id="@+id/profile_image"
+        android:layout_width="96dp"
+        android:layout_gravity="center"
+        android:layout_height="96dp"
+        android:src="@drawable/profile" />
 
-</FrameLayout>
+</LinearLayout>

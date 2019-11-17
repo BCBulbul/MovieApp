@@ -4,9 +4,10 @@ package burakcanbulbul.com.movieapp.ui.movies
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AbsListView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-import burakcanbulbul.com.movieapp.R
 import burakcanbulbul.com.movieapp.adapter.NowPlayingMoviesAdapter
 import burakcanbulbul.com.movieapp.adapter.PopularMoviesAdapter
 import burakcanbulbul.com.movieapp.adapter.TopRatedMoviesAdapter
@@ -18,11 +19,12 @@ import burakcanbulbul.com.movieapp.remote.MovieDBAppDataSource
 import burakcanbulbul.com.movieapp.widget.RecyclerViewClickListener
 import burakcanbulbul.com.movieapp.helper.StartSnapHelper
 import burakcanbulbul.com.movieapp.model.Movie
+import burakcanbulbul.com.movieapp.widget.EndlessRecyclerOnScrollListener
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
+import android.R
 
-
-class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickListener{
+class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickListener {
 
     @Inject
     lateinit var movieDBAppDataSource: MovieDBAppDataSource
@@ -48,7 +50,7 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
         init()
     }
 
-    override fun getLayoutRes(): Int = R.layout.fragment_movies
+    override fun getLayoutRes(): Int = burakcanbulbul.com.movieapp.R.layout.fragment_movies
 
     override fun init() {
         initPresenter()
@@ -63,6 +65,7 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
     }
 
     override fun initTopRatedMoviesAdapter(movieResult: MovieResult) {
+
         if(top_rated_movies_recycler_View.adapter == null){
             topRatedMoviesAdapter = TopRatedMoviesAdapter(movieResult.movieResults)
             topRatedMoviesAdapter.setOnRecyclerViewClickListener(this)
@@ -71,6 +74,17 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
             val startSnapHelper : StartSnapHelper = StartSnapHelper()
             startSnapHelper.attachToRecyclerView(top_rated_movies_recycler_View)
             top_rated_movies_recycler_View.adapter = topRatedMoviesAdapter
+            fetchTopRatedMovies(MovieDBConstants.API_KEY,2)
+
+        }else{
+            top_rated_movies_recycler_View.addOnScrollListener(object : EndlessRecyclerOnScrollListener(top_rated_movies_recycler_View.layoutManager as LinearLayoutManager) {
+                override fun onLoadMore(currentPage: Int) {
+                    Log.d("Pagenumber",currentPage.toString())
+                    fetchTopRatedMovies(MovieDBConstants.API_KEY, currentPage)
+                    topRatedMoviesAdapter.addAll(movieResult.movieResults)
+                }
+
+            })
         }
 
 
@@ -85,6 +99,15 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
             val startSnapHelper : StartSnapHelper = StartSnapHelper()
             startSnapHelper.attachToRecyclerView(now_playing_movies_recycler_view)
             now_playing_movies_recycler_view.adapter = nowPlayingMoviesAdapter
+            fetchNowPlayingMovies(MovieDBConstants.API_KEY, 2)
+        }else{
+            now_playing_movies_recycler_view.addOnScrollListener(object : EndlessRecyclerOnScrollListener(now_playing_movies_recycler_view.layoutManager as LinearLayoutManager) {
+                override fun onLoadMore(currentPage: Int) {
+                    fetchNowPlayingMovies(MovieDBConstants.API_KEY, currentPage)
+                    nowPlayingMoviesAdapter.addAll(movies)
+                }
+
+            })
         }
 
     }
@@ -98,6 +121,16 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
             val startSnapHelper : StartSnapHelper = StartSnapHelper()
             startSnapHelper.attachToRecyclerView(popular_movies_recycler_view)
             popular_movies_recycler_view.adapter = popularMoviesAdapter
+            fetchPopularMovies(MovieDBConstants.API_KEY,2)
+
+        }else{
+            popular_movies_recycler_view.addOnScrollListener(object : EndlessRecyclerOnScrollListener(popular_movies_recycler_view.layoutManager as LinearLayoutManager) {
+                override fun onLoadMore(currentPage: Int) {
+                    fetchPopularMovies(MovieDBConstants.API_KEY, currentPage)
+                    popularMoviesAdapter.addAll(movies)
+                }
+
+            })
         }
     }
 
@@ -128,5 +161,6 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
     override fun onRecyclerViewClick(view: View?, position: Int) {
         Log.d("ClickedRecycler",view!!.id.toString())
     }
+
 
 }

@@ -44,7 +44,6 @@ class PopularMoviesAdapter() : RecyclerView.Adapter<PopularMoviesAdapter.ViewHol
         init {itemView.setOnClickListener(this)}
 
         fun bind(movie : Movie){
-            Log.d("MovieNowPlayingAdapter", movie.voteAverage.toString())
             Picasso.get().load(MovieDBConstants.IMAGE_URL.plus(movie.posterPath)).into(itemView.popular_movies_image_view)
             itemView.popular_movies_text_view.text = movie.originalTitle
             itemView.popular_movies_average_text.text = movie.voteAverage.toString()
@@ -52,6 +51,13 @@ class PopularMoviesAdapter() : RecyclerView.Adapter<PopularMoviesAdapter.ViewHol
 
         override fun onClick(v: View?) {
             recyclerViewClickListener.onRecyclerViewClick(v,adapterPosition)
+        }
+    }
+
+    fun addAll(movies : ArrayList<Movie>){
+        if(this.movies.containsAll(movies).not()){
+            this.movies.addAll(movies)
+            this.notifyDataSetChanged()
         }
     }
 }

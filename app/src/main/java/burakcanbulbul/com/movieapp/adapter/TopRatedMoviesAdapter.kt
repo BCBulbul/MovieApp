@@ -43,12 +43,19 @@ class TopRatedMoviesAdapter() : RecyclerView.Adapter<TopRatedMoviesAdapter.ViewH
         init {itemView.setOnClickListener(this)}
 
         fun bind(movie : Movie){
-            Log.d("MovieAdapter",MovieDBConstants.IMAGE_URL.plus(movie.posterPath))
             Picasso.get().load(MovieDBConstants.IMAGE_URL.plus(movie.posterPath)).into(itemView.top_rated_movies_list_image_view)
         }
 
         override fun onClick(v: View?) {
             recyclerViewClickListener.onRecyclerViewClick(v,adapterPosition)
+        }
+    }
+
+
+    fun addAll(movies : ArrayList<Movie>){
+        if(this.movies.containsAll(movies).not()){
+            this.movies.addAll(movies)
+            this.notifyDataSetChanged()
         }
     }
 }
