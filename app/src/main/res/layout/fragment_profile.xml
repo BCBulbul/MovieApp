@@ -6,12 +6,32 @@
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:background=""
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:text="Profile"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_margin="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_marginTop="30dp"
         android:id="@+id/profile_image"
         android:layout_width="96dp"
         android:layout_gravity="center"
-        android:layout_height="96dp"
-        android:src="@drawable/profile" />
+        android:src="@drawable/tabprofileselected"
+        android:layout_height="96dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_marginTop="20dp"
+        android:text="AppLogist"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

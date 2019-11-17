@@ -29,9 +29,6 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        click.setOnClickListener {
-            fragmentNavigation.pushFragment(MoviesFragment.newInstance())
-        }
     }
 
     override fun getLayoutRes(): Int = R.layout.fragment_profile

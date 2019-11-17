@@ -8,9 +8,9 @@
     <application
         android:name="burakcanbulbul.MainApplication"
         android:allowBackup="true"
-        android:icon="@drawable/appIcon"
+        android:icon="@drawable/appicon"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/appIcon"
+        android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
