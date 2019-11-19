@@ -47,7 +47,7 @@ class TopRatedTVSeriesAdapter() : RecyclerView.Adapter<TopRatedTVSeriesAdapter.V
         }
 
         override fun onClick(v: View?) {
-            recyclerViewClickListener.onRecyclerViewClick(v,adapterPosition)
+            recyclerViewClickListener.onRecyclerViewClick(v,adapterPosition, 0)
         }
     }
 

@@ -30,6 +30,9 @@ interface MovieDBAppDataSource {
     @GET("movie/{movie_id}/credits?")
     fun getMovieCredit(@Path("movie_id") movieId: Int, @Query("api_key") apiKey: String) : Call<MovieCredit>
 
+    @GET("movie/{movie_id}/videos?")
+    fun getMovieTrailerVideo(@Path("movie_id") movieId: Int, @Query("api_key") apiKey: String) : Call<MovieVideo>
+
     @GET("tv/{tv_id}?")
     fun getTVSeriesDetail(@Path("tv_id") tvId : Int, @Query("api_key") apiKey: String) : Call<TVSeriesDetail>
 

@@ -123,7 +123,7 @@ class TVFragment : BaseFragment(), TVContract.View, RecyclerViewClickListener {
         initTopRatedTVSeriesAdapter(tvSeries)
     }
 
-    override fun onRecyclerViewClick(view: View?, position: Int) {
+    override fun onRecyclerViewClick(view: View?, position: Int, request : Int) {
         Log.d("ViewTVFragment",view.hashCode().toString())
     }
 

@@ -49,7 +49,7 @@ class NowPlayingMoviesAdapter() : RecyclerView.Adapter<NowPlayingMoviesAdapter.V
         }
 
         override fun onClick(v: View?) {
-            recyclerViewClickListener.onRecyclerViewClick(v,adapterPosition)
+            recyclerViewClickListener.onRecyclerViewClick(v,adapterPosition, MovieDBConstants.NOW_PLAYING_MOVIES)
         }
     }
 

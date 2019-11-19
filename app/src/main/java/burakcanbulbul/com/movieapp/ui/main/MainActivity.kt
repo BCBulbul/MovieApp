@@ -72,16 +72,18 @@ class MainActivity : BaseActivity() , MainActivityView, FragNavController.RootFr
        bottom_navigation_menu.setOnNavigationItemSelectedListener {
            when(it.itemId){
                R.id.navigation_movies -> {
-                   fragNavController.switchTab(INDEX_MOVIES)
                    it.setIcon(R.drawable.tabmoviesselected)
+                   fragNavController.switchTab(INDEX_MOVIES)
+
                }
                R.id.navigation_tv -> {
-                   fragNavController.switchTab(INDEX_TV)
                    it.setIcon(R.drawable.tabtvselected)
+                   fragNavController.switchTab(INDEX_TV)
+
                }
                R.id.navigation_profile ->{
-                   fragNavController.switchTab(INDEX_PROFILE)
                    it.setIcon(R.drawable.tabprofileselected)
+                   fragNavController.switchTab(INDEX_PROFILE)
                }
            }
            return@setOnNavigationItemSelectedListener true

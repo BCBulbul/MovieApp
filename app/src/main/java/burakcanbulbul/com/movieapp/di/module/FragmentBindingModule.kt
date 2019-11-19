@@ -1,6 +1,7 @@
 package burakcanbulbul.com.movieapp.di.module
 
 import burakcanbulbul.com.movieapp.base.BaseFragment
+import burakcanbulbul.com.movieapp.ui.detail.DetailFragment
 import burakcanbulbul.com.movieapp.ui.movies.MoviesFragment
 import burakcanbulbul.com.movieapp.ui.profile.ProfileFragment
 import burakcanbulbul.com.movieapp.ui.tv.TVFragment
@@ -17,4 +18,6 @@ abstract class FragmentBindingModule {
     abstract fun bindTVFragment() : TVFragment
     @ContributesAndroidInjector
     abstract fun bindProfileFragment() : ProfileFragment
+    @ContributesAndroidInjector
+    abstract fun bindDetailFragment() : DetailFragment
 }

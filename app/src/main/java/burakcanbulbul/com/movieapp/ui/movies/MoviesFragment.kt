@@ -23,6 +23,7 @@ import burakcanbulbul.com.movieapp.widget.EndlessRecyclerOnScrollListener
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
 import android.R
+import burakcanbulbul.com.movieapp.ui.detail.DetailFragment
 
 class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickListener {
 
@@ -35,6 +36,10 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
     private lateinit var nowPlayingMoviesAdapter: NowPlayingMoviesAdapter
     private lateinit var popularMoviesAdapter: PopularMoviesAdapter
 
+    private var topRatedList : ArrayList<Movie> = arrayListOf()
+    private var popularList : ArrayList<Movie> = arrayListOf()
+    private var nowPlayingList : ArrayList<Movie> = arrayListOf()
+
     companion object{
         fun newInstance() : MoviesFragment{
             val bundle : Bundle = Bundle()
@@ -43,6 +48,7 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
             return moviesFragment
         }
     }
+    
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,6 +73,7 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
     override fun initTopRatedMoviesAdapter(movieResult: MovieResult) {
 
         if(top_rated_movies_recycler_View.adapter == null){
+            this.topRatedList = movieResult.movieResults
             topRatedMoviesAdapter = TopRatedMoviesAdapter(movieResult.movieResults)
             topRatedMoviesAdapter.setOnRecyclerViewClickListener(this)
             top_rated_movies_recycler_View.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -79,8 +86,8 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
         }else{
             top_rated_movies_recycler_View.addOnScrollListener(object : EndlessRecyclerOnScrollListener(top_rated_movies_recycler_View.layoutManager as LinearLayoutManager) {
                 override fun onLoadMore(currentPage: Int) {
-                    Log.d("Pagenumber",currentPage.toString())
                     fetchTopRatedMovies(MovieDBConstants.API_KEY, currentPage)
+                    topRatedList = movieResult.movieResults
                     topRatedMoviesAdapter.addAll(movieResult.movieResults)
                 }
 
@@ -92,6 +99,7 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
 
     override fun initNowPlayingMoviesAdapter(movies: ArrayList<Movie>) {
         if(now_playing_movies_recycler_view.adapter == null){
+            this.nowPlayingList = movies
             nowPlayingMoviesAdapter = NowPlayingMoviesAdapter(movies)
             nowPlayingMoviesAdapter.setOnRecyclerViewClickListener(this)
             now_playing_movies_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -104,6 +112,7 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
             now_playing_movies_recycler_view.addOnScrollListener(object : EndlessRecyclerOnScrollListener(now_playing_movies_recycler_view.layoutManager as LinearLayoutManager) {
                 override fun onLoadMore(currentPage: Int) {
                     fetchNowPlayingMovies(MovieDBConstants.API_KEY, currentPage)
+                    nowPlayingList = movies
                     nowPlayingMoviesAdapter.addAll(movies)
                 }
 
@@ -114,6 +123,7 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
 
     override fun initPopularMoviesAdapter(movies: ArrayList<Movie>) {
         if(popular_movies_recycler_view.adapter == null){
+            this.popularList = movies
             popularMoviesAdapter = PopularMoviesAdapter(movies)
             popularMoviesAdapter.setOnRecyclerViewClickListener(this)
             popular_movies_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -127,6 +137,7 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
             popular_movies_recycler_view.addOnScrollListener(object : EndlessRecyclerOnScrollListener(popular_movies_recycler_view.layoutManager as LinearLayoutManager) {
                 override fun onLoadMore(currentPage: Int) {
                     fetchPopularMovies(MovieDBConstants.API_KEY, currentPage)
+                    popularList = movies
                     popularMoviesAdapter.addAll(movies)
                 }
 
@@ -158,8 +169,24 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
         moviesPresenter.getTopRatedMovies(apiKey,pageNumber)
     }
 
-    override fun onRecyclerViewClick(view: View?, position: Int) {
-        Log.d("ClickedRecycler",view!!.id.toString())
+    override fun onRecyclerViewClick(view: View?, position: Int, request : Int) {
+        when(request){
+            MovieDBConstants.TOP_RATED_MOVIES -> {
+                val bundle : Bundle = Bundle()
+                bundle.putInt("id",this.topRatedList[position].id)
+                pushFragment(DetailFragment.newInstance(bundle))
+            }
+
+            MovieDBConstants.NOW_PLAYING_MOVIES -> {
+                val bundle : Bundle = Bundle()
+                bundle.putInt("id",this.nowPlayingList[position].id)
+                pushFragment(DetailFragment.newInstance(bundle))            }
+
+            MovieDBConstants.POPULAR_MOVIES -> {
+                val bundle : Bundle = Bundle()
+                bundle.putInt("id",this.popularList[position].id)
+                pushFragment(DetailFragment.newInstance(bundle))            }
+        }
     }
 
 

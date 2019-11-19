@@ -50,7 +50,7 @@ class PopularMoviesAdapter() : RecyclerView.Adapter<PopularMoviesAdapter.ViewHol
         }
 
         override fun onClick(v: View?) {
-            recyclerViewClickListener.onRecyclerViewClick(v,adapterPosition)
+            recyclerViewClickListener.onRecyclerViewClick(v,adapterPosition, MovieDBConstants.POPULAR_MOVIES)
         }
     }
 

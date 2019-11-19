@@ -31,7 +31,7 @@ kapt {
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
@@ -40,11 +40,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     //Retrofit 2
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
-    implementation "com.squareup.retrofit2:converter-gson:2.6.2"
-
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     //Dagger 2
     implementation 'com.google.dagger:dagger:2.19'
     kapt 'com.google.dagger:dagger-compiler:2.19'
@@ -54,16 +52,12 @@ dependencies {
     implementation 'com.google.dagger:dagger-android:2.19'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.19'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.19'
-
     //Chuck
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
     releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
-
     //FragNav
     implementation 'com.ncapdevi:frag-nav:3.2.0'
-
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
-
-
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }

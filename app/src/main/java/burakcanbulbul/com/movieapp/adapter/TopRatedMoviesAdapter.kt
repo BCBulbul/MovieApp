@@ -47,7 +47,7 @@ class TopRatedMoviesAdapter() : RecyclerView.Adapter<TopRatedMoviesAdapter.ViewH
         }
 
         override fun onClick(v: View?) {
-            recyclerViewClickListener.onRecyclerViewClick(v,adapterPosition)
+            recyclerViewClickListener.onRecyclerViewClick(v,adapterPosition, MovieDBConstants.TOP_RATED_MOVIES)
         }
     }
 

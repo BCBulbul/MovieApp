@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@android:color/black"
+    android:layout_height="?attr/actionBarSize">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/toolbar_back_button"
+                android:layout_centerVertical="true"
+                android:background="@drawable/leftchevron"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:text="Back"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/toolbar_share_button"
+                android:background="@drawable/icshare"
+                android:layout_margin="13dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+
+
+
+
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>

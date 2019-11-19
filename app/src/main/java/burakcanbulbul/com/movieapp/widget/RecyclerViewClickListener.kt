@@ -5,5 +5,5 @@ import burakcanbulbul.com.movieapp.model.Movie
 import burakcanbulbul.com.movieapp.ui.movies.MoviesContract
 
 interface RecyclerViewClickListener {
-    fun onRecyclerViewClick(view : View?, position : Int)
+    fun onRecyclerViewClick(view : View?, position : Int, request : Int)
 }
