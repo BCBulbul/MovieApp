@@ -10,7 +10,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        app:cardCornerRadius="10dp"
         android:layout_width="match_parent"
         android:layout_height="270dp">
 
@@ -40,7 +39,6 @@
                     android:layout_gravity="end"
                     android:layout_width="48dp"
                     android:textAlignment="center"
-                    app:fabSize="normal"
                     android:src="@drawable/floating_action_button_gradient"
                     android:layout_height="48dp" >
 

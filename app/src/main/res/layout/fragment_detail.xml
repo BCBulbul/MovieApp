@@ -26,12 +26,10 @@
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:fitsSystemWindows="true"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    app:layout_collapseMode="parallax"
                     android:background="@android:color/white"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -92,7 +90,6 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_marginBottom="40dp"
-                app:cardCornerRadius="10dp"
                 android:layout_marginStart="20dp"
                 android:layout_alignParentBottom="true"
                 android:layout_width="150dp"

@@ -92,7 +92,6 @@ class MainActivity : BaseActivity() , MainActivityView, FragNavController.RootFr
 
 
     override fun setOnBottomBarReselectListener() {
-
         bottom_navigation_menu.setOnNavigationItemReselectedListener {
             fragNavController.clearStack()
         }

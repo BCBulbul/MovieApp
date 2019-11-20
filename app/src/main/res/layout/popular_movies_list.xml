@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="220dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
     android:layout_height="300dp">
 
     <LinearLayout
@@ -38,7 +37,6 @@
                         android:layout_gravity="end"
                         android:layout_width="48dp"
                         android:textAlignment="center"
-                        app:fabSize="normal"
                         android:src="@drawable/floating_action_button_gradient"
                         android:layout_height="48dp" >
 
