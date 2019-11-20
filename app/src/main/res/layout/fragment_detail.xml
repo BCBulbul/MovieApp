@@ -49,9 +49,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="220dp">
 
-
-                <com.google.android.youtube.player.YouTubePlayerView
-                    android:id="@+id/detail_video_view"
+                <WebView
+                    android:background="@android:color/black"
+                    android:id="@+id/detail_web_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
@@ -166,6 +166,26 @@
 
 
         </androidx.appcompat.widget.AppCompatTextView>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textColor="@color/movie_text_view_color"
+            android:textSize="17sp"
+            android:textAlignment="center"
+            android:text="Full Cast and Crew"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/credit_movies_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

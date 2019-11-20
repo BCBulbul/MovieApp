@@ -174,17 +174,20 @@ class MoviesFragment : BaseFragment() , MoviesContract.View , RecyclerViewClickL
             MovieDBConstants.TOP_RATED_MOVIES -> {
                 val bundle : Bundle = Bundle()
                 bundle.putInt("id",this.topRatedList[position].id)
+                bundle.putString("overview",topRatedList[position].overview)
                 pushFragment(DetailFragment.newInstance(bundle))
             }
 
             MovieDBConstants.NOW_PLAYING_MOVIES -> {
                 val bundle : Bundle = Bundle()
                 bundle.putInt("id",this.nowPlayingList[position].id)
+                bundle.putString("overview",nowPlayingList[position].overview)
                 pushFragment(DetailFragment.newInstance(bundle))            }
 
             MovieDBConstants.POPULAR_MOVIES -> {
                 val bundle : Bundle = Bundle()
                 bundle.putInt("id",this.popularList[position].id)
+                bundle.putString("overview",popularList[position].overview)
                 pushFragment(DetailFragment.newInstance(bundle))            }
         }
     }
